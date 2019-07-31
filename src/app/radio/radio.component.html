@@ -1,0 +1,29 @@
+<audio #radio>
+  <source [src]="selectedStation.src">
+  Your browser isn't invited for super fun audio time.
+</audio>
+
+
+<div class="container" >
+  <div class="row text-center head">
+    <h2 class='w-100'><i class="fa fa-headphones"></i> Free Online radio stations</h2>
+  </div>
+  <div class="row main-section">
+    <div class="volume-bar w-100">
+      <mat-slider class="w-100 custom-slide" min="0" max="1" step="0.05" (input)="onChangeVolume($event)" [value]="volume"></mat-slider>
+      <span>
+        <i class="fa fa-volume-off volume-icon" (click)="unMute()" *ngIf="volume==0"></i>
+        <i class="fa fa-volume-up volume-icon" (click)="mute(volume)" *ngIf="volume>0.3"></i>
+        <i class="fa fa-volume-down volume-icon" (click)="mute(volume)" *ngIf="volume>0 && volume<0.31"></i>
+      </span>
+    </div>
+    <div class="radio-station" *ngFor="let station of radioStations;let i=index;">
+      <img [src]="station.coverPhoto" alt="Play radio" />
+      <span class="icon-wrap" [ngClass]="(station.id == playingStation) ? 'pause' : 'play'">
+        <i class="fa fa-play custom-icon" *ngIf="station.id != playingStation" (click)="play(i)"></i>
+        <i class="fa fa-pause custom-icon" *ngIf="station.id == playingStation" (click)="pause()"></i>
+      </span>
+
+    </div>
+  </div>
+</div>
